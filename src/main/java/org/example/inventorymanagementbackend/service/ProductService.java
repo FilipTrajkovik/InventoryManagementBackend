@@ -13,4 +13,6 @@ public interface ProductService {
 
     Product addProduct(CreateProductDTO createProductDTO);
 
+    Product updateProduct(Long id, CreateProductDTO createProductDTO);
+
 }

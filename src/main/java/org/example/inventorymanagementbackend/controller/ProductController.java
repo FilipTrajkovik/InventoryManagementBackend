@@ -31,7 +31,9 @@ public class ProductController {
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(products, HttpStatus.OK);
-    };
+    }
+
+    ;
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) {
@@ -41,9 +43,17 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> addProduct (@RequestBody CreateProductDTO createProductDTO) {
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody CreateProductDTO createProductDTO) {
         ProductDTO productDTO = productMapperService.getAsProductDto(productService.addProduct(createProductDTO));
 
         return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
-    };
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") Long id,
+                                                    @RequestBody CreateProductDTO createProductDTO) {
+        ProductDTO productDTO = productMapperService.getAsProductDto(productService.updateProduct(id, createProductDTO));
+
+        return new ResponseEntity<>(productDTO, HttpStatus.OK);
+    }
 }

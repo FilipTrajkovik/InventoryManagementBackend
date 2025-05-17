@@ -43,5 +43,18 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+    @Override
+    public Product updateProduct(Long id, CreateProductDTO createProductDTO) {
+        Product product = getProductById(id);
+
+        product.setName(createProductDTO.getName());
+        product.setDescription(createProductDTO.getDescription());
+        product.setPrice(createProductDTO.getPrice());
+        product.setQuantityInStock(createProductDTO.getQuantityInStock());
+        product.setCategory(Category.valueOf(createProductDTO.getCategory()));
+
+        return productRepository.save(product);
+    }
+
 
 }
