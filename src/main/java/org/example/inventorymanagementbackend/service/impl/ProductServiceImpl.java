@@ -1,5 +1,6 @@
 package org.example.inventorymanagementbackend.service.impl;
 
+import org.example.inventorymanagementbackend.exception.ProductNotFoundException;
 import org.example.inventorymanagementbackend.model.Product;
 import org.example.inventorymanagementbackend.repository.ProductRepository;
 import org.example.inventorymanagementbackend.service.ProductService;
@@ -19,4 +20,12 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
+
+    @Override
+    public Product getProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + " was not found."));
+    }
+
+
 }

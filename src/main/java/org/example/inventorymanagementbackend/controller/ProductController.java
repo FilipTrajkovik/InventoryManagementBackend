@@ -7,6 +7,7 @@ import org.example.inventorymanagementbackend.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,4 +34,11 @@ public class ProductController {
 
         return new ResponseEntity<>(products, HttpStatus.OK);
     };
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) {
+        ProductDTO productDTO = productMapperService.getAsProductDto(productService.getProductById(id));
+
+        return new ResponseEntity<>(productDTO, HttpStatus.OK);
+    }
 }
