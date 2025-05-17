@@ -1,15 +1,13 @@
 package org.example.inventorymanagementbackend.controller;
 
 
+import org.example.inventorymanagementbackend.dto.CreateProductDTO;
 import org.example.inventorymanagementbackend.dto.ProductDTO;
 import org.example.inventorymanagementbackend.service.ProductMapperService;
 import org.example.inventorymanagementbackend.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,4 +39,11 @@ public class ProductController {
 
         return new ResponseEntity<>(productDTO, HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<ProductDTO> addProduct (@RequestBody CreateProductDTO createProductDTO) {
+        ProductDTO productDTO = productMapperService.getAsProductDto(productService.addProduct(createProductDTO));
+
+        return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
+    };
 }
