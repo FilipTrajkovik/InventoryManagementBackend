@@ -1,6 +1,11 @@
 package org.example.inventorymanagementbackend.service;
 
-import org.springframework.stereotype.Service;
+import org.example.inventorymanagementbackend.model.Product;
+
+import java.util.List;
 
 public interface ProductService {
+
+    List<Product> getAllProducts();
+
 }

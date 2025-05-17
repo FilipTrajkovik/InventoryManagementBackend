@@ -2,35 +2,35 @@ package org.example.inventorymanagementbackend.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.inventorymanagementbackend.model.enums.Category;
 
-@Data
+@Entity
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
-    public String name;
+    private String name;
 
     @Column(name = "description")
-    public String description;
+    private String description;
 
     @Column(name = "price", nullable = false)
     @Min(0)
-    public Double price;
+    private Double price;
 
     @Column(name = "quantity_in_stock", nullable = false)
     @Min(0)
-    public Integer quantityInStock;
+    private Integer quantityInStock;
 
     @Column(name = "category", nullable = false)
     @Enumerated(EnumType.STRING)
-    public Category category;
+    private Category category;
 }

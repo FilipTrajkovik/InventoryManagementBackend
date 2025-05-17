@@ -1,20 +1,21 @@
 package org.example.inventorymanagementbackend.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
-    public Long id;
+    private Long id;
 
-    public String name;
+    private String name;
 
-    public String description;
+    private String description;
 
-    public Double price;
+    private Double price;
 
-    public Integer quantityInStock;
+    private Integer quantityInStock;
 
-    public String category;
+    private String category;
 }
