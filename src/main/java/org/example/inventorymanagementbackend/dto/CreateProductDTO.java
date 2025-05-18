@@ -18,5 +18,5 @@ public class CreateProductDTO {
 
     private Integer quantityInStock;
 
-    private String category;
+    private int category;
 }

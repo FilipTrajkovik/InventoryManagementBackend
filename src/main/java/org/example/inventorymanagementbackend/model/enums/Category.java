@@ -2,6 +2,8 @@ package org.example.inventorymanagementbackend.model.enums;
 
 import lombok.Data;
 
+import java.util.Arrays;
+
 public enum Category {
     FOOD("Food"),
     HOUSEHOLD("Household"),
@@ -17,5 +19,12 @@ public enum Category {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public static Category fromDisplayName(String displayName) {
+        return Arrays.stream(Category.values())
+                .filter(c -> c.displayName.equalsIgnoreCase(displayName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category: " + displayName));
     }
 }

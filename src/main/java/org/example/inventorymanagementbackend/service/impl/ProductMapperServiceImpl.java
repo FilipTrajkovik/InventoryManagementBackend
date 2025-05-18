@@ -1,5 +1,6 @@
 package org.example.inventorymanagementbackend.service.impl;
 
+import org.example.inventorymanagementbackend.dto.CategoryDTO;
 import org.example.inventorymanagementbackend.dto.ProductDTO;
 import org.example.inventorymanagementbackend.model.Product;
 import org.example.inventorymanagementbackend.service.ProductMapperService;
@@ -16,7 +17,7 @@ public class ProductMapperServiceImpl implements ProductMapperService {
         resultProductDto.setDescription(product.getDescription());
         resultProductDto.setPrice(product.getPrice());
         resultProductDto.setQuantityInStock(product.getQuantityInStock());
-        resultProductDto.setCategory(String.valueOf(product.getCategory()));
+        resultProductDto.setCategory(new CategoryDTO(product.getCategory().ordinal(), product.getCategory().getDisplayName()));
 
         return resultProductDto;
     }

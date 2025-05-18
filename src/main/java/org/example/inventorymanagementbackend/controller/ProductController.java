@@ -3,6 +3,7 @@ package org.example.inventorymanagementbackend.controller;
 
 import org.example.inventorymanagementbackend.dto.CreateProductDTO;
 import org.example.inventorymanagementbackend.dto.ProductDTO;
+import org.example.inventorymanagementbackend.model.enums.Category;
 import org.example.inventorymanagementbackend.service.ProductMapperService;
 import org.example.inventorymanagementbackend.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -24,16 +25,28 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<ProductDTO> products = productService.getAllProducts()
-                .stream()
-                .map(productMapperService::getAsProductDto)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<ProductDTO>> getAllProducts(@RequestParam(required = false) String name,
+                                                           @RequestParam(required = false) Double priceFrom,
+                                                           @RequestParam(required = false) Double priceTo,
+                                                           @RequestParam(required = false) Integer categoryId) {
 
+        List<ProductDTO> products;
+        if (name == null && priceFrom == null && priceTo == null && categoryId == null) {
+            products = productService.getAllProducts()
+                    .stream()
+                    .map(productMapperService::getAsProductDto)
+                    .collect(Collectors.toList());
+
+        } else {
+            products = productService.getAllProductsFiltered(name, priceFrom, priceTo, categoryId)
+                    .stream()
+                    .map(productMapperService::getAsProductDto)
+                    .collect(Collectors.toList());
+
+        }
         return new ResponseEntity<>(products, HttpStatus.OK);
-    }
 
-    ;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) {
