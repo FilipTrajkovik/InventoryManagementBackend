@@ -9,14 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateProductDTO {
-    private String name;
-
-    private String description;
-
-    private Double price;
-
-    private Integer quantityInStock;
-
-    private int category;
+public class CategoryDTO {
+    private Integer id;
+    private String categoryName;
 }
